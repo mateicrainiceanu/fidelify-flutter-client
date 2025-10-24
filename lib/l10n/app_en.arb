@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "appName": "Fidelify",
+
+  "authLogin": "Login",
+  "authRegister": "Register",
+  "authDontHaveAccountRegister": "Don't have an account? Register here",
+  "authAlreadyHaveAccountLogin": "Already have an account? Login here",
+  "authPassword": "Password",
+  "authRegistrationSuccess": "Registration successful!",
+  "authLoginSuccess": "Login successful!",
+  "authLogoutSuccess": "Logout successful",
+
+  "userFname": "First Name",
+  "userLname": "Last Name",
+  "userEmail": "Email",
+  "userPhone": "Phone Number",
+  "userBdate": "Birth Date",
+  "userPassword": "Password"
+}
