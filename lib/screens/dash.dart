@@ -1,3 +1,4 @@
+import 'package:fidelify_client/models/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:fidelify_client/l10n/app_localizations.dart';
 
@@ -27,7 +28,28 @@ class _DashState extends State<Dash> {
   @override
   Widget build(BuildContext context) {
 
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
+
+    final List<TabItem> tabData = [
+      TabItem(
+        label: "home",
+        title: l10n.home,
+        icon: const Icon(Icons.home),
+        widget: const Center(child: Text("Hello")),
+      ),
+      if (true) TabItem(
+        label: "businesses",
+        title: l10n.myShops,
+        icon: const Icon(Icons.store_rounded),
+        widget: const Center(child: Text("Hello")),
+      ),
+      TabItem(
+          label: "user",
+          title: l10n.user,
+          icon: const Icon(Icons.person),
+          widget: const Center(child: Text("Hello")),
+      ),
+    ];
 
     return PopScope(
       canPop: false,
@@ -35,7 +57,7 @@ class _DashState extends State<Dash> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: Text("Dash"),
+          title: Text(tabData[_selectedIndex].title),
         ),
         bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
@@ -45,10 +67,11 @@ class _DashState extends State<Dash> {
           elevation: 0,
           type: BottomNavigationBarType.fixed,
           onTap: _onItemTapped,
-            items: const [
-              BottomNavigationBarItem(label: "home", icon: Icon(Icons.home)),
-              BottomNavigationBarItem(label: "user", icon: Icon(Icons.person))
-            ]
+            items: tabData.map((item) => BottomNavigationBarItem(
+                label: item.title,
+                icon: item.icon,
+              )
+            ).toList(),
         ),
       ),
     );

@@ -16,5 +16,13 @@
   "userEmail": "Email",
   "userPhone": "Phone Number",
   "userBdate": "Birth Date",
-  "userPassword": "Password"
+  "userPassword": "Password",
+
+  "home": "Home",
+  "user": "User",
+  "myShops": "My Shops",
+
+  "anErrorOcc": "An error has occurred.",
+  "retry": "Retry"
+
 }

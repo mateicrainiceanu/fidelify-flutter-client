@@ -11,13 +11,17 @@ class AuthUserProvider extends ChangeNotifier {
 
   String? _token;
   AUser? _user;
+  bool _cannotConnect = false;
 
   String? get token => _token;
   AUser? get user => _user;
   bool? get isLoggedIn => _token != null && _user != null;
+  bool get cannotConnect => _cannotConnect;
+
 
   /// Initialize provider (e.g., on app start)
   Future<void> init() async {
+    _cannotConnect = false;
     Log.trace("AuthUserProvider.init");
     _token = await _storage.read(key: _tokenKey);
 
@@ -60,6 +64,8 @@ class AuthUserProvider extends ChangeNotifier {
       _user = response.val!;
       Log.info("User fetched: ${_user?.id}");
       notifyListeners();
+    } else if (response.status == NetworkStatus.error && response.error?.code == 0) {
+      _cannotConnect = true;
     } else {
       _user = null;
     }

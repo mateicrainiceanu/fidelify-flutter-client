@@ -183,6 +183,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password'**
   String get userPassword;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @user.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get user;
+
+  /// No description provided for @myShops.
+  ///
+  /// In en, this message translates to:
+  /// **'My Shops'**
+  String get myShops;
+
+  /// No description provided for @anErrorOcc.
+  ///
+  /// In en, this message translates to:
+  /// **'An error has occurred.'**
+  String get anErrorOcc;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
 }
 
 class _AppLocalizationsDelegate

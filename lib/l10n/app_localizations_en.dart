@@ -54,4 +54,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get userPassword => 'Password';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get user => 'User';
+
+  @override
+  String get myShops => 'My Shops';
+
+  @override
+  String get anErrorOcc => 'An error has occurred.';
+
+  @override
+  String get retry => 'Retry';
 }
