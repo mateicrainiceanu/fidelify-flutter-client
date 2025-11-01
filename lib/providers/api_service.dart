@@ -101,6 +101,22 @@ class ApiService {
     );
   }
 
+  // ✨ Public PUT method
+  Future<RequestResponse<T>> put<T>({
+    required String path,
+    Map<String, dynamic>? params,
+    dynamic data,
+    T Function(Map<String, dynamic>)? parser,
+  }) async {
+    return _request<T>(
+      path: path,
+      method: DioMethods.put,
+      params: params,
+      data: data,
+      parser: parser,
+    );
+  }
+
   // 🚀 Generic request handler
   Future<RequestResponse<T>> _request<T>({
     required String path,

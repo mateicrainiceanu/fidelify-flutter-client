@@ -1,8 +1,11 @@
+import 'package:fidelify_client/providers/api_service.dart';
 import 'package:fidelify_client/screens/dash/user/person_circle_filled.dart';
 import 'package:fidelify_client/utils/logger.dart';
+import 'package:fidelify_client/utils/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/auth_user.dart';
 import '../../../providers/auth_user_provider.dart';
 
 class UserEditForm extends StatefulWidget {
@@ -22,9 +25,10 @@ class _UserEditFormState extends State<UserEditForm> {
   late String _fname;
   late String _lname;
   late String _phone;
+  late String _email;
   DateTime? _bdate;
 
-  void _submit() {
+  void _submit() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
@@ -34,9 +38,36 @@ class _UserEditFormState extends State<UserEditForm> {
 
     _formKey.currentState!.save();
     Log.info(
-        "UserEditingFrom._submit(): ${_fname} ${_lname} ${_phone} ${_bdate?.toLocal().toString()}");
+        "UserEditingFrom._submit(): $_fname $_lname $_phone ${_bdate?.toLocal().toString()}");
 
     // handle request
+
+    final response = await ApiService.instance.put<AuthUser>(path: "/api/v1/user", data: {
+      "fname": _fname,
+      "lname": _lname,
+      "phone": _phone,
+      "email": _email,
+      "bdate": _bdate?.toLocal().toString()
+    }, parser: AuthUser.fromJson);
+
+
+    if (!mounted) return;
+
+    if (response.status == NetworkStatus.error) {
+      Toast.error("${response.error?.message ?? "Unknown error"} [${response.error?.code}]");
+      setState(() {
+        _isLoading = false;
+      });
+    } else {
+      final authProvider = Provider.of<AuthUserProvider>(context, listen: false);
+
+      Log.trace("UserEditForm._submit -> Success: ${response.val!.token.substring(0, 10)}");
+
+      Toast.success("Success");
+
+      authProvider.setUser(response.val!);
+
+    }
 
     // end handle request
 
@@ -48,7 +79,9 @@ class _UserEditFormState extends State<UserEditForm> {
     widget.onSubmit?.call();
   }
 
-  void _discard() {}
+  void _discard() {
+    widget.onSubmit?.call();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +89,8 @@ class _UserEditFormState extends State<UserEditForm> {
     final user = auth.user!;
 
     return Container(
+      padding: const EdgeInsets.all(16),
       width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
@@ -78,7 +110,11 @@ class _UserEditFormState extends State<UserEditForm> {
               TextFormField(
                 initialValue: user.email,
                 decoration: const InputDecoration(labelText: 'Email'),
-                readOnly: true,
+                validator: (em) => em == null || em.isEmpty || !em.contains('@') || !em.contains('.')
+                    ? 'A valid email is required'
+                    : null,
+                onSaved: (val) => _email = val ?? '',
+
               ),
               TextFormField(
                 initialValue: user.phone ?? '',
@@ -127,7 +163,6 @@ class _UserEditFormState extends State<UserEditForm> {
             ],
           ),
         ),
-      ),
     );
   }
 }

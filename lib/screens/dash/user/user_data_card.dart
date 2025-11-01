@@ -27,7 +27,7 @@ class UserDataCard extends StatelessWidget {
                   Text(_user.lname ?? "${l10n.userLname}: -"),
                   Text(_user.email),
                   Text(_user.phone ?? "${l10n.userPhone}: -"),
-                  Text(_user.bdate?.toString() ?? "${l10n.userBdate}: -"),
+                  Text(_user.bdateStr ?? "${l10n.userBdate}: -"),
                 ],
               ),
               const Spacer(),

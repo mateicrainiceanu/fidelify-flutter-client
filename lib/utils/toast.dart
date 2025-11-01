@@ -25,6 +25,42 @@ class Toast {
     );
   }
 
+  static void success(String message, {String? description, Duration autoCloseDuration = _defaultAutoCloseDuration}) {
+    show(
+      message,
+      description: description,
+      type: ToastType.success,
+      autoCloseDuration: autoCloseDuration,
+    );
+  }
+
+  static void error(String message, {String? description, Duration autoCloseDuration = _defaultAutoCloseDuration}) {
+    show(
+      message,
+      description: description,
+      type: ToastType.error,
+      autoCloseDuration: autoCloseDuration,
+    );
+  }
+
+  static void warning(String message, {String? description, Duration autoCloseDuration = _defaultAutoCloseDuration}) {
+    show(
+      message,
+      description: description,
+      type: ToastType.warning,
+      autoCloseDuration: autoCloseDuration,
+    );
+  }
+
+  static void info(String message, {String? description, Duration autoCloseDuration = _defaultAutoCloseDuration}) {
+    show(
+      message,
+      description: description,
+      type: ToastType.info,
+      autoCloseDuration: autoCloseDuration,
+    );
+  }
+
   /// Private converter from our custom type → ToastificationType
   static ToastificationType _mapToToastificationType(ToastType type) {
     switch (type) {

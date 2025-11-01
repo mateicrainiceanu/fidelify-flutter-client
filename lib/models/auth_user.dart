@@ -28,6 +28,8 @@ class AUser {
   final DateTime createdAt;
   final DateTime updatedAt;
 
+  String? get bdateStr => bdate?.toLocal().toString().split(' ')[0].split('-').reversed.join('.');
+
   AUser({
     required this.id,
     required this.email,
