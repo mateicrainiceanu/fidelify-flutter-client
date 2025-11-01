@@ -3,9 +3,9 @@ import 'package:fidelify_client/providers/auth_user_provider.dart';
 import 'package:fidelify_client/screens/dash.dart';
 import 'package:fidelify_client/screens/loading_screen.dart';
 import 'package:fidelify_client/utils/logger.dart';
+import 'package:fidelify_client/utils/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:fidelify_client/screens/login_screen.dart';
 import 'package:toastification/toastification.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -55,44 +55,7 @@ class MyApp extends StatelessWidget {
           Locale('en'),
           Locale('ro')
         ],
-        theme: ThemeData(
-          primaryColor: const Color(0xFF3B62FF),
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3B62FF)),
-          textTheme: GoogleFonts.poppinsTextTheme(
-            Theme.of(context).textTheme,
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF3B62FF),
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-              textStyle: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Colors.grey,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Color(0xFF3B62FF),
-              ),
-            ),
-            labelStyle: const TextStyle(
-              color: Colors.grey,
-            ),
-          ),
-        ),
+        theme: getThemeData(context),
         initialRoute: '/',
         routes: {
           '/': (context) => LoadingScreen(),

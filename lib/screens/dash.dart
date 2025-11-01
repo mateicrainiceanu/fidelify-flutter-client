@@ -1,4 +1,5 @@
 import 'package:fidelify_client/models/tab_item.dart';
+import 'package:fidelify_client/screens/dash/user/user_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:fidelify_client/l10n/app_localizations.dart';
 
@@ -47,7 +48,7 @@ class _DashState extends State<Dash> {
           label: "user",
           title: l10n.user,
           icon: const Icon(Icons.person),
-          widget: const Center(child: Text("Hello")),
+          widget: const UserMenu(),
       ),
     ];
 
@@ -59,6 +60,7 @@ class _DashState extends State<Dash> {
           centerTitle: true,
           title: Text(tabData[_selectedIndex].title),
         ),
+        body: tabData[_selectedIndex].widget,
         bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
