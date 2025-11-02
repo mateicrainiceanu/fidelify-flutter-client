@@ -1,5 +1,5 @@
 import 'package:fidelify_client/providers/api_service.dart';
-import 'package:fidelify_client/screens/dash/user/person_circle_filled.dart';
+import 'package:fidelify_client/widgets/person_circle_filled.dart';
 import 'package:fidelify_client/utils/logger.dart';
 import 'package:fidelify_client/utils/toast.dart';
 import 'package:flutter/material.dart';

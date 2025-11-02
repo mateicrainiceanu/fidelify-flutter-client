@@ -1,6 +1,7 @@
 import 'package:fidelify_client/l10n/app_localizations.dart';
 import 'package:fidelify_client/models/auth_user.dart';
-import 'package:fidelify_client/screens/dash/user/person_circle_filled.dart';
+import 'package:fidelify_client/widgets/person_circle_filled.dart';
+import 'package:fidelify_client/widgets/titles.dart';
 import 'package:flutter/material.dart';
 
 class UserDataCard extends StatelessWidget {
@@ -23,6 +24,8 @@ class UserDataCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const H3Title("User Data"),
+                  const SizedBox(height: 10),
                   Text(_user.fname ?? "${l10n.userFname}: -"),
                   Text(_user.lname ?? "${l10n.userLname}: -"),
                   Text(_user.email),
