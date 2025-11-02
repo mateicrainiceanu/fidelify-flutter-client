@@ -125,7 +125,7 @@ class ApiService {
     dynamic data,
     T Function(Map<String, dynamic>)? parser,
   }) async {
-    Log.trace("ApiService._request: ${method.name}: ${path}");
+    Log.trace("ApiService._request: $method.name: $path");
     try {
       Response response;
       switch (method) {
@@ -145,10 +145,10 @@ class ApiService {
           response = await _dio.delete(path, queryParameters: params, data: data);
           break;
       }
-      Log.trace("ApiService._request: ${method.name}: ${path} -> Success ${response.statusCode}");
+      Log.trace("ApiService._request: ${method.name}: $path -> Success ${response.statusCode}");
       return _handleResponse<T>(response, parser);
     } catch (error) {
-      Log.trace("ApiService._request: ${method.name}: ${path} -> Error ${error.toString()}");
+      Log.trace("ApiService._request: ${method.name}: $path -> Error ${error.toString()}");
       return _handleError<T>(error);
     }
   }
@@ -184,7 +184,7 @@ class ApiService {
       final errorMsg = error.response?.data['error'] ?? "Network error";
       final statusCode = error.response?.statusCode ?? 0;
 
-      Log.error("ApiService._handleError DioEx -> ${statusCode}: ${errorMsg} --> ${error.response?.toString()}");
+      Log.error("ApiService._handleError DioEx -> $statusCode: $errorMsg --> ${error.response?.toString()}");
 
       return RequestResponse.failure(
         NetworkError(

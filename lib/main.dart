@@ -58,9 +58,9 @@ class MyApp extends StatelessWidget {
         theme: getThemeData(context),
         initialRoute: '/',
         routes: {
-          '/': (context) => LoadingScreen(),
+          '/': (context) => const LoadingScreen(),
           '/login': (context) => const LoginScreen(),
-          '/dash': (context) => Dash(),
+          '/dash': (context) => const Dash(),
         },
       ),
     );

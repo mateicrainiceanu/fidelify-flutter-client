@@ -9,7 +9,7 @@ enum ToastType {
 }
 
 class Toast {
-  static const _defaultAutoCloseDuration = const Duration(seconds: 5);
+  static const _defaultAutoCloseDuration = Duration(seconds: 5);
   static const _defaultToastType = ToastType.info;
 
   static void show(
