@@ -27,29 +27,60 @@ class _UserDataSectionState extends State<UserDataSection> {
       });
     }
 
-    return Column(children: [
-      _isEditing
-          ? UserEditForm(onSubmit: () {
-              setState(() {
-                _isEditing = false;
-              });
-            })
-          : UserDataCard(user),
-      if (!_isEditing)
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-          child: Row(spacing: 8, children: [
-            Expanded(
-                child: OutlinedButton(
+    void logout() async {
+      auth.logout();
+      Navigator.of(context).pushNamed("/login");
+    }
+
+
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 400),
+      switchInCurve: Curves.easeOutCubic,
+      switchOutCurve: Curves.easeInCubic,
+      transitionBuilder: (child, animation) {
+        return SizeTransition(
+          sizeFactor: animation,
+          axisAlignment: -1.0,
+          child: FadeTransition(opacity: animation, child: child),
+        );
+      },
+      child: _isEditing
+          ? Column(
+        key: const ValueKey('edit'),
+        children: [
+          UserEditForm(
+            onSubmit: () => setState(() => _isEditing = false),
+          ),
+        ],
+      )
+          : Column(
+        key: const ValueKey('view'),
+        children: [
+          UserDataCard(user),
+          Padding(
+            padding:
+            const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+            child: Row(
+              spacing: 8,
+              children: [
+                Expanded(
+                  child: OutlinedButton(
                     onPressed: toggleEditing,
-                    child: const Text("Edit profile"))),
-            Expanded(
-                child: ElevatedButton(
-                    onPressed: () {},
+                    child: const Text("Edit profile"),
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: logout,
                     style: ButtonThemes.destructiveBtnStyle,
-                    child: const Text("Log out"))),
-          ]),
-        ),
-    ]);
+                    child: const Text("Log out"),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

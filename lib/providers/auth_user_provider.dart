@@ -71,4 +71,8 @@ class AuthUserProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void logout() async {
+    await clearToken();
+  }
 }
