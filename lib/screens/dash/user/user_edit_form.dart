@@ -21,6 +21,7 @@ class _UserEditFormState extends State<UserEditForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _isLoading = false;
+  bool _isModified = false;
 
   late String _fname;
   late String _lname;
@@ -83,6 +84,14 @@ class _UserEditFormState extends State<UserEditForm> {
     widget.onSubmit?.call();
   }
 
+  void enableSubmit() {
+    if (!_isModified) {
+      setState(() {
+        _isModified = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthUserProvider>();
@@ -92,6 +101,7 @@ class _UserEditFormState extends State<UserEditForm> {
       padding: const EdgeInsets.all(16),
       width: double.infinity,
         child: Form(
+          onChanged: enableSubmit,
           key: _formKey,
           child: Column(
             spacing: 16,
@@ -140,6 +150,7 @@ class _UserEditFormState extends State<UserEditForm> {
                         lastDate: DateTime.now(),
                       );
                       if (picked != null) {
+                        enableSubmit();
                         setState(() => _bdate = picked);
                       }
                     },
@@ -153,9 +164,14 @@ class _UserEditFormState extends State<UserEditForm> {
                       spacing: 8,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ElevatedButton(
-                            onPressed: _submit,
-                            child: const Text("Save changes")),
+                        AnimatedOpacity(
+                          duration: const Duration(milliseconds: 200),
+                          opacity: _isModified ? 1.0 : 0.6,
+                          child: ElevatedButton(
+                            onPressed: _isModified ? _submit : null,
+                            child: const Text("Save changes"),
+                          ),
+                        ),
                         OutlinedButton(
                             onPressed: _discard, child: const Text("Discard"))
                       ],
