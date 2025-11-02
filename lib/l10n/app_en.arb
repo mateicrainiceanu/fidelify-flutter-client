@@ -23,6 +23,7 @@
   "myShops": "My Shops",
 
   "anErrorOcc": "An error has occurred.",
-  "retry": "Retry"
+  "retry": "Retry",
+  "loading": "Loading"
 
 }

@@ -1,6 +1,8 @@
+import 'package:fidelify_client/providers/app_preferences_provider.dart';
 import 'package:fidelify_client/widgets/preference_switch_row.dart';
 import 'package:fidelify_client/widgets/titles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AppPreferences extends StatefulWidget {
   const AppPreferences({super.key});
@@ -11,16 +13,11 @@ class AppPreferences extends StatefulWidget {
 
 class _AppPreferencesState extends State<AppPreferences> {
 
-  bool _shopOwner = false;
-
-  void _shopOwnerToggle(bool newVal) {
-    setState(() {
-      _shopOwner = newVal;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+
+    final appPref = context.watch<AppPreferencesProvider>();
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -32,8 +29,8 @@ class _AppPreferencesState extends State<AppPreferences> {
 
           PreferenceSwitchRow(
               title: "Shop owner",
-              value: _shopOwner,
-              onChanged: _shopOwnerToggle
+              value: appPref.isShopOwner,
+              onChanged: appPref.setShopOwner
           ),
 
         ],

@@ -1,6 +1,6 @@
 import 'package:fidelify_client/providers/api_service.dart';
 import 'package:fidelify_client/providers/auth_user_provider.dart';
-import 'package:fidelify_client/screens/dash.dart';
+import 'package:fidelify_client/screens/dash/provider_dash.dart';
 import 'package:fidelify_client/screens/loading_screen.dart';
 import 'package:fidelify_client/utils/logger.dart';
 import 'package:fidelify_client/utils/theme.dart';
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const LoadingScreen(),
           '/login': (context) => const LoginScreen(),
-          '/dash': (context) => const Dash(),
+          '/dash': (context) => const ProviderDash(),
         },
       ),
     );
