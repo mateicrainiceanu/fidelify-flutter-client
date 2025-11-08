@@ -1,5 +1,6 @@
 import 'package:fidelify_client/models/tab_item.dart';
 import 'package:fidelify_client/providers/app_preferences_provider.dart';
+import 'package:fidelify_client/screens/dash/businesses/business_screen.dart';
 import 'package:fidelify_client/screens/dash/user/user_menu.dart';
 import 'package:fidelify_client/screens/simple_loading_screen.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class _DashState extends State<Dash> {
           label: "businesses",
           title: l10n.myShops,
           icon: const Icon(Icons.store_rounded),
-          widget: const Center(child: Text("Hello")),
+          widget: const BusinessScreen(),
         ),
       TabItem(
         label: "user",
