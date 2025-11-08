@@ -1,4 +1,4 @@
-import 'package:fidelify_client/models/business.dart';
+import 'package:fidelify_client/models/business/business_models.dart';
 import 'package:fidelify_client/providers/api_service.dart';
 import 'package:fidelify_client/utils/toast.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +7,15 @@ import '../../../utils/logger.dart';
 
 class EditBusinessDataScreen extends StatefulWidget {
   final Business? business;
+  final void Function(Business? b)? onFinish;
 
-  const EditBusinessDataScreen({super.key, this.business});
+  const EditBusinessDataScreen({super.key, this.business, this.onFinish});
+
+  void finished(Business? b) {
+    if (onFinish != null) {
+      onFinish!(b);
+    }
+  }
 
 
   @override
@@ -55,8 +62,6 @@ class _EditBusinessDataScreenState extends State<EditBusinessDataScreen> {
 
     setLoading(true);
 
-    Log.info("submitting");
-
     final response = _creating
       ? await api.post(path: "/api/v1/business", data: _bd.toJson())
       : await api.put(path: "/api/v1/business/${_bd.id}", data: _bd.toJson());
@@ -69,6 +74,9 @@ class _EditBusinessDataScreenState extends State<EditBusinessDataScreen> {
       Toast.error("${response.error!.message} [${response.error!.code}]");
       return;
     }
+
+    final business = Business.fromJson(response.val!);
+    widget.finished(business);
 
     Toast.success("Success!");
     Navigator.pop(context);

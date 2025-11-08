@@ -1,4 +1,5 @@
 import 'package:fidelify_client/screens/dash/businesses/edit_business_data_screen.dart';
+import 'package:fidelify_client/utils/logger.dart';
 import 'package:flutter/material.dart';
 
 class BusinessScreen extends StatelessWidget {
@@ -15,7 +16,17 @@ class BusinessScreen extends StatelessWidget {
         children: [
           ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const EditBusinessDataScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            EditBusinessDataScreen(
+                              onFinish: (b) {
+                                //TODO: Handle business enrollment
+                                Log.info("EditBusinessDataScreen.onFinish => ${b?.id} ${b?.identifier}");
+                              },
+                            ),
+                    ),
+                );
               },
               child: const Row(
                 spacing: 10,
