@@ -1,12 +1,19 @@
+import 'package:fidelify_client/providers/businesses_provider.dart';
+import 'package:fidelify_client/screens/dash/businesses/business_tile_view.dart';
 import 'package:fidelify_client/screens/dash/businesses/edit_business_data_screen.dart';
-import 'package:fidelify_client/utils/logger.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../models/business/business.dart';
 
 class BusinessScreen extends StatelessWidget {
   const BusinessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final businessProvider = context.watch<BusinessProvider>();
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -20,10 +27,7 @@ class BusinessScreen extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) =>
                             EditBusinessDataScreen(
-                              onFinish: (b) {
-                                //TODO: Handle business enrollment
-                                Log.info("EditBusinessDataScreen.onFinish => ${b?.id} ${b?.identifier}");
-                              },
+                              onFinish: businessProvider.addBusiness,
                             ),
                     ),
                 );
@@ -38,7 +42,7 @@ class BusinessScreen extends StatelessWidget {
               ),
           ),
 
-
+          BusinessTileView(business: Business.mockBusiness),
 
         ],
       ),

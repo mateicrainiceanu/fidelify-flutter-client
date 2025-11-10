@@ -3,7 +3,6 @@ import 'package:fidelify_client/providers/api_service.dart';
 import 'package:fidelify_client/utils/toast.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/logger.dart';
 
 class EditBusinessDataScreen extends StatefulWidget {
   final Business? business;
@@ -63,7 +62,7 @@ class _EditBusinessDataScreenState extends State<EditBusinessDataScreen> {
     setLoading(true);
 
     final response = _creating
-      ? await api.post(path: "/api/v1/business", data: _bd.toJson())
+      ? await api.post<Business>(path: "/api/v1/business", data: _bd.toJson(), parser: Business.fromJson)
       : await api.put(path: "/api/v1/business/${_bd.id}", data: _bd.toJson());
 
     if (!mounted) return;
@@ -75,8 +74,7 @@ class _EditBusinessDataScreenState extends State<EditBusinessDataScreen> {
       return;
     }
 
-    final business = Business.fromJson(response.val!);
-    widget.finished(business);
+    widget.finished(response.val);
 
     Toast.success("Success!");
     Navigator.pop(context);

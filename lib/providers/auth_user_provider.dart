@@ -26,7 +26,7 @@ class AuthUserProvider extends ChangeNotifier {
     _token = await _storage.read(key: _tokenKey);
 
     if (_token != null && _token!.isNotEmpty) {
-      Log.info("AuthUserProvider.init - Found token");
+      Log.info("AuthUserProvider.init - Found token: $_token");
       ApiService.instance.attachAuthProvider(this);
       await fetchUserData();
     }

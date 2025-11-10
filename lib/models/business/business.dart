@@ -33,4 +33,21 @@ class Business {
           : null),
     );
   }
+
+  static final mockBusiness = Business(
+    id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+    identifier: 'fidelify_coffee_shop',
+    name: 'Fidelify Coffee Shop',
+    pictureUrl: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170',
+    website: 'https://fidelifycoffee.com',
+    onlineStatus: 'online',
+    permissions: const BusinessPermissions(
+      id: '3a60b158-104c-4b80-8af2-b7aa67676db7',
+      isCreator: true,
+      canCreate: true,
+      canEditOffer: true,
+      canSeeOffer: true,
+      canValidateOffer: true,
+    ),
+  );
 }

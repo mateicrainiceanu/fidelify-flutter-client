@@ -1,4 +1,5 @@
 import 'package:fidelify_client/providers/app_preferences_provider.dart';
+import 'package:fidelify_client/providers/businesses_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,8 +11,11 @@ class ProviderDash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AppPreferencesProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AppPreferencesProvider()),
+        ChangeNotifierProvider(create: (context) => BusinessProvider()),
+      ],
       child: const Dash(),
     );
   }
