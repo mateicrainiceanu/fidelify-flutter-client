@@ -22,6 +22,8 @@ class BusinessProvider extends ChangeNotifier {
   }
 
   Future<void> fetchBusiness() async {
+    _businesses.removeRange(0, _businesses.length);
+
     final response = await api.get<BusinessListResponse>(
         path: "/api/v1/businesses",
         params: {
