@@ -30,7 +30,7 @@ class BusinessScreen extends StatelessWidget {
                     child: ListView.separated(
                         itemBuilder: (context, index) {
                           final business = businessProvider.businesses[index];
-                          return BusinessTileView(business: business);
+                          return BusinessTileView(business: business, businessProvider: businessProvider);
                         },
                         separatorBuilder: (context, idx) =>
                             const SizedBox(height: 10),

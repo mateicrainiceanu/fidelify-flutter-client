@@ -63,7 +63,7 @@ class _EditBusinessDataScreenState extends State<EditBusinessDataScreen> {
 
     final response = _creating
       ? await api.post<Business>(path: "/api/v1/business", data: _bd.toJson(), parser: Business.fromJson)
-      : await api.put(path: "/api/v1/business/${_bd.id}", data: _bd.toJson());
+      : await api.put<Business>(path: "/api/v1/business/${_bd.id}", data: _bd.toJson(), parser: Business.fromJson);
 
     if (!mounted) return;
 
@@ -161,7 +161,7 @@ class _EditBusinessDataScreenState extends State<EditBusinessDataScreen> {
                         ? const CircularProgressIndicator()
                         : ElevatedButton(
                         onPressed: _submit,
-                        child: const Text("Add your business to Fidelify"))
+                        child: Text(_creating ? "Add your business to Fidelify" : "Save"))
                   ],
                 )),
           ),

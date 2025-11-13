@@ -36,7 +36,7 @@ class FSBusinessAppBar extends StatelessWidget implements PreferredSizeWidget {
       flexibleSpace: Stack(
         fit: StackFit.expand,
         children: [
-          if (imageUrl != null)
+          if (imageUrl != null && imageUrl.isNotEmpty)
             Image.network(
               imageUrl,
               fit: BoxFit.cover,

@@ -4,11 +4,13 @@ import 'package:fidelify_client/widgets/business_status_indicator.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/business/business.dart';
+import '../../../providers/businesses_provider.dart';
 
 class BusinessTileView extends StatelessWidget {
   final Business business;
+  final BusinessProvider businessProvider;
 
-  const BusinessTileView({required this.business, super.key});
+  const BusinessTileView({required this.business, required this.businessProvider, super.key});
 
   static const String _fallbackAsset = 'assets/images/business_default.jpg';
 
@@ -30,7 +32,7 @@ class BusinessTileView extends StatelessWidget {
             Log.info("Tapped on widget business ${business.name} [${business.identifier}]");
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => FSBusinessView(business: business)),
+              MaterialPageRoute(builder: (context) => FSBusinessView(business: business, businessProvider: businessProvider)),
             );
           },
           child: Stack(

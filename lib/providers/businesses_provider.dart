@@ -52,4 +52,14 @@ class BusinessProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void modifyBusiness(Business? business) {
+    if (business == null) return;
+
+    final index = _businesses.indexWhere((element) => element.id == business.id);
+    if (index == -1) return;
+
+    _businesses[index] = business;
+    notifyListeners();
+  }
+
 }
