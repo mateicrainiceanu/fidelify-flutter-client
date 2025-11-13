@@ -1,12 +1,8 @@
-import 'dart:collection';
-
 import 'package:fidelify_client/providers/businesses_provider.dart';
 import 'package:fidelify_client/screens/dash/businesses/business_tile_view.dart';
 import 'package:fidelify_client/screens/dash/businesses/edit_business_data_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../models/business/business.dart';
 
 class BusinessScreen extends StatelessWidget {
   const BusinessScreen({super.key});

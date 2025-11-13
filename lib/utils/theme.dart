@@ -82,4 +82,14 @@ class ButtonThemes {
       ),
   );
 
+  static final roundedBtnStyle = ElevatedButton.styleFrom(
+    backgroundColor: const Color(0xFF3B62FF),
+    foregroundColor: Colors.white,
+    shape: const CircleBorder(),
+    padding: const EdgeInsets.all(10),
+    textStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+    )
+  );
 }
