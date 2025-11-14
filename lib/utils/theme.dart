@@ -3,8 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 extension ExtraColors on ColorScheme {
   Color get secondaryButtonBorder => primary;
+
   Color get secondaryButtonText => primary;
+
   Color get destructiveButtonBackground => error;
+
   Color get destructiveButtonText => onError;
 }
 
@@ -13,7 +16,9 @@ ThemeData getThemeData(BuildContext context) {
     primaryColor: const Color(0xFF3B62FF),
     colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3B62FF)),
     textTheme: GoogleFonts.poppinsTextTheme(
-      Theme.of(context).textTheme,
+      Theme
+          .of(context)
+          .textTheme,
     ),
 
     // 🔹 Primary (default) button style
@@ -70,26 +75,30 @@ ThemeData getThemeData(BuildContext context) {
 
 class ButtonThemes {
   static final destructiveBtnStyle = ElevatedButton.styleFrom(
-      backgroundColor: Colors.red.shade600,
-      foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
-      textStyle: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-      ),
-  );
-
-  static final roundedBtnStyle = ElevatedButton.styleFrom(
-    backgroundColor: const Color(0xFF3B62FF),
+    backgroundColor: Colors.red.shade600,
     foregroundColor: Colors.white,
-    shape: const CircleBorder(),
-    padding: const EdgeInsets.all(10),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+    padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
     textStyle: const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.bold,
-    )
+    ),
   );
+
+  static ButtonStyle fromElevatedButtonWithColors({required Color bgColor, Color? txtColor}) {
+    return ElevatedButton.styleFrom(
+        backgroundColor: bgColor,
+        foregroundColor: txtColor ?? Colors.white,
+        shape: const CircleBorder(),
+        padding: const EdgeInsets.all(10),
+        textStyle: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+    );
+  }
+
+  static get roundedBtnStyle => fromElevatedButtonWithColors(bgColor: const Color(0xFF3B62FF));
 }

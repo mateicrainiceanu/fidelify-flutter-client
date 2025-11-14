@@ -1,4 +1,4 @@
-import 'package:fidelify_client/screens/dash/businesses/fs_business_comp/fs_business_view.dart';
+import 'package:fidelify_client/screens/dash/businesses/fs_business_comp/fs_business_screen.dart';
 import 'package:fidelify_client/utils/logger.dart';
 import 'package:fidelify_client/widgets/business_status_indicator.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ class BusinessTileView extends StatelessWidget {
             Log.info("Tapped on widget business ${business.name} [${business.identifier}]");
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => FSBusinessView(business: business, businessProvider: businessProvider)),
+              MaterialPageRoute(builder: (context) => FSBusinessScreen(business: business, businessProvider: businessProvider)),
             );
           },
           child: Stack(
@@ -75,7 +75,7 @@ class BusinessTileView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (business.shouldShowStatus) BusinessStatusIndicator(st: business.onlineStatus),
+                    if (business.hasSomePermission) BusinessStatusIndicator(st: business.onlineStatus),
                     const Spacer(),
                     Text(
                       business.name,

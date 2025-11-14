@@ -19,7 +19,6 @@ class BusinessScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: 16,
         children: [
-          // BusinessTileView(business: Business.mockBusiness),
           Expanded(
             child: businessProvider.isLoading
                 ? const CircularProgressIndicator()
@@ -28,9 +27,12 @@ class BusinessScreen extends StatelessWidget {
                       await businessProvider.fetchBusiness();
                     },
                     child: ListView.separated(
+                        physics: const AlwaysScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           final business = businessProvider.businesses[index];
-                          return BusinessTileView(business: business, businessProvider: businessProvider);
+                          return BusinessTileView(
+                              business: business,
+                              businessProvider: businessProvider);
                         },
                         separatorBuilder: (context, idx) =>
                             const SizedBox(height: 10),

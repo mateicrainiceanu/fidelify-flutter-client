@@ -55,7 +55,7 @@ class Business {
   final String? website;
   final OnlineStatus onlineStatus;
   final BusinessPermissions? permissions;
-  bool get shouldShowStatus => _hasSomePermission();
+  bool get hasSomePermission => _hasSomePermission();
 
   Business({
     required this.id,
