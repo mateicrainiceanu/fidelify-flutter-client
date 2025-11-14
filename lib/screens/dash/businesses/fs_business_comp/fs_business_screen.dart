@@ -5,26 +5,40 @@ import 'package:fidelify_client/screens/dash/businesses/fs_business_comp/fs_busi
 import 'package:flutter/material.dart';
 
 import '../../../../widgets/business_status_indicator.dart';
+import '../../../error_screen.dart';
 
-class FSBusinessScreen extends StatelessWidget {
+class FSBusinessScreen extends StatefulWidget {
   final Business business;
   final BusinessProvider businessProvider;
 
   const FSBusinessScreen({required this.business, super.key, required this.businessProvider});
 
+  @override
+  State<FSBusinessScreen> createState() => _FSBusinessScreenState();
+}
+
+class _FSBusinessScreenState extends State<FSBusinessScreen> {
+
+  late Business? business = widget.businessProvider.businesses.firstWhere((b) => b.id == widget.business.id);
 
   @override
   Widget build(BuildContext context) {
 
-    bool showAdmin = business.hasSomePermission;
+    bool showAdmin = widget.business.hasSomePermission;
+
+    if (business == null) return const ErrorScreen(text: "Business not found");
 
     return Scaffold(
-      appBar: FSBusinessAppBar(business: business),
+      appBar: FSBusinessAppBar(business: business!),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: RefreshIndicator(
           onRefresh: () async {
-            await Future.delayed(const Duration(seconds: 2));
+            final business = await widget.businessProvider.refreshBusiness(withStringId: widget.business.id);
+            if (business == null) {return;}
+            setState(() {
+              this.business = business;
+            });
           },
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -32,8 +46,8 @@ class FSBusinessScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               spacing: 10,
               children: [
-                if (showAdmin) BusinessStatusIndicator(st: business.onlineStatus, textColor: Colors.black),
-                if (showAdmin) BusinessEditMenu(business: business, businessProvider: businessProvider),
+                if (showAdmin) BusinessStatusIndicator(st: business!.onlineStatus, textColor: Colors.black),
+                if (showAdmin) BusinessEditMenu(business: business!, businessProvider: widget.businessProvider),
               ],
             ),
           ),
